@@ -1,0 +1,80 @@
+﻿@model EmployeeModel
+
+@{
+    ViewData["Title"] = Model != null ? "Edit" : "Create";
+}
+
+<h4>@ViewData["Title"] Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @{
+            var title = @ViewData["Title"];
+        }
+        <form asp-action=@title>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (title.ToString() == "Edit")
+            {
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label"></label>
+                    <label  class="form-control">@Model.Department</label>
+                    <input type="hidden" asp-for="Department" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmpId" class="control-label"></label>
+                    <label class="form-control">@Model.EmpId</label>
+                    <input type="hidden" asp-for="EmpId" class="form-control" />
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label"></label>
+                    <select asp-for="Department" class="form-control" aria-label="Default select example">
+                        <option selected>Select Department</option>
+                        <option value="MWP">MWP</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="HR">HR</option>
+                    </select>
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmpId" class="control-label"></label>
+                    <input asp-for="EmpId" class="form-control" />
+                    <span asp-validation-for="EmpId" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Domain" class="control-label"></label>
+                <select asp-for="Domain" class="form-control" aria-label="Default select example">
+                    <option selected>Select Department</option>
+                    <option value="DotNet">DotNet</option>
+                    <option value="NodeJs">NodeJs</option>
+                    <option value="ReactJs">ReactJs</option>
+                </select>
+                <span asp-validation-for="Domain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@title class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
